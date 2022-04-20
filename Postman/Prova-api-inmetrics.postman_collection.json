@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "28a75370-47f7-451f-aa2f-11441a382a62",
+		"name": "Prova-api-inmetrics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrar novo empregado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validar CPF cadastrado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"664.943.610-05\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 800ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(800);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "automacao",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "inmetrics",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"admissao\": \"15/01/2022\",\r\n  \"cargo\": \"Analista de testes\",\r\n  \"comissao\": \"1.000,00\",\r\n  \"cpf\": \"664.943.610-05\",\r\n  \"departamentoId\": 1,\r\n  \"nome\": \"Teste um\",\r\n  \"salario\": \"5.000,00\",\r\n  \"sexo\": \"m\",\r\n  \"tipoContratacao\": \"clt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}empregado/cadastrar",
+					"host": [
+						"{{baseUrl}}empregado"
+					],
+					"path": [
+						"cadastrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Empregado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valida retorno do cpf do empregado\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"664.943.610-05\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "automacao",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "inmetrics",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}empregado/list/1425",
+					"host": [
+						"{{baseUrl}}empregado"
+					],
+					"path": [
+						"list",
+						"1425"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultando todos os empregados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validando se o Status code é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "automacao",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "inmetrics",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}empregado/list_all",
+					"host": [
+						"{{baseUrl}}empregado"
+					],
+					"path": [
+						"list_all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterando Cargo do empregado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validando novo cargo\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Analista de testes Senior\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "automacao",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "inmetrics",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"admissao\": \"15/01/2022\",\r\n  \"cargo\": \"Analista de testes Senior\",\r\n  \"comissao\": \"1.000,00\",\r\n  \"cpf\": \"664.943.610-05\",\r\n  \"departamentoId\": 1,\r\n  \"nome\": \"Teste um\",\r\n  \"salario\": \"9.000,00\",\r\n  \"sexo\": \"m\",\r\n  \"tipoContratacao\": \"clt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}empregado/alterar/1425",
+					"host": [
+						"{{baseUrl}}empregado"
+					],
+					"path": [
+						"alterar",
+						"1425"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletando empregado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 202\", function () {\r",
+							"    pm.response.to.have.status(202);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "automacao",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "inmetrics",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}empregado/deletar/1425",
+					"host": [
+						"{{baseUrl}}empregado"
+					],
+					"path": [
+						"deletar",
+						"1425"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
